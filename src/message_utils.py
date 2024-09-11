@@ -64,11 +64,11 @@ async def main(client):
             # Gửi đến tất cả các kênh nếu không có dấu #
             target_channels = list(simplified_channel_mapping.values())
             modified_message_text = message_text
-            print("modified_message_text: ", modified_message_text)
+            # print("modified_message_text: ", modified_message_text)
         
         # Sử dụng hàm modify_message_text để thay đổi vị trí các dấu ** và __
         modified_message_text = modify_message_text(modified_message_text)
-        print("modified_message_text sau khi gửi: ", modified_message_text)
+        # print("modified_message_text sau khi gửi: ", modified_message_text)
 
         message_relations = {}
         # Gửi tin nhắn theo từng lô và áp dụng độ trễ
@@ -87,7 +87,6 @@ async def main(client):
     async def send_message_to_channel(client, original_message_id, channel_id, message_text, media=None):
         try:
             channel_entity = await get_channel_entity(client, channel_id)
-            print("message_test: ", message_text)
             # Kiểm tra xem media có phải là MessageMediaWebPage không
             if isinstance(media, MessageMediaWebPage):
                 print("Loại bỏ MessageMediaWebPage khỏi tin nhắn.")
@@ -186,9 +185,9 @@ async def main(client):
         else:
             # Nếu không phải lệnh "/rm", xử lý chỉnh sửa tin nhắn thông thường
             modified_message_text = text.replace(command, '').strip()
-            print("modified_message_text gốc: ", modified_message_text)
+            # print("modified_message_text gốc: ", modified_message_text)
             modified_message_text = modify_message_text(modified_message_text)
-            print("modified_message_text sau edit: ", modified_message_text)
+            # print("modified_message_text sau edit: ", modified_message_text)
 
             message_relations = await fetch_message_relations(original_message_id)
             if not message_relations:

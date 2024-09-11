@@ -26,6 +26,22 @@ lấy gói " pip freeze > requirements.txt "
 pyinstaller --onefile your_main_script.py
 ---------
 
+recently-installed  ( sudo apt install devscripts )
+htop
+
+sudo apt install python3-venv
+python3 -m venv myenv
+source myenv/bin/activate
+pip install aiohttp==3.8.1
+
+rm myfile.txt
+rm /home/user/mydirectory/*         Lệnh này sẽ xóa tất cả các tập tin trong thư mục “mydirectory”, nhưng nó sẽ không xóa chính thư mục đó.
+rm -r /home/user/mydirectory/*        Lệnh này sẽ xóa tất cả các tập tin và thư mục con trong “mydirectory”, cũng như chính thư mục đó.
+rmdir directory                        Xoá thư mục trống, “directory” là tên của thư mục mà chúng ta muốn xóa. Nếu thư mục không trống, chúng ta sẽ nhận được một thông báo lỗi.
+rm -r directory                       Để xóa một thư mục và nội dung của nó
+
+
+
 
 
 [{"ChannelMapping":{"1":"@chanws1","2":"chan9090s","3":"-1002133340256"},"Title":"Title 1","id":"1"},{"ChannelMapping":{},"Title":"Title 2","id":"2"},{"ChannelMapping":{},"Title":"Title 3","id":"3"}]
