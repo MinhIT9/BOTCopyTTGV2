@@ -1,7 +1,7 @@
 # BOTCOPY/src/config.py
 
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 
 MAX_MESSAGES_PER_BATCH = 10 # Số lượng tin nhắn gửi tối đa đến Channel
 MESSAGE_SEND_DELAY = 0.5  # Delay in seconds
