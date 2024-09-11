@@ -1,6 +1,6 @@
 # BOTCOPY/src/message_utils.py
 
-import asyncio, aiohttp, re
+import asyncio, aiohttp, re # type: ignore
 from telethon import events # type: ignore
 from telethon.tl.types import MessageMediaWebPage # type: ignore
 from config import channel_0, channel_mapping, bot_token, messageMaping_api,messageMaping_api_id , MAX_MESSAGES_PER_BATCH, MESSAGE_SEND_DELAY, channel_mapping_api, channel_mapping_api_id
@@ -28,12 +28,23 @@ async def main(client):
     
     # ------- Send START-------- #
     def modify_message_text(text):
-        # Đoạn regex này tìm kiếm mẫu liên kết định dạng Markdown với **__ và __** bao quanh chữ được liên kết
-        pattern = r"\[\*\*__(.*?)__\*\*\]\((https://[^)]+)\)"
-        # Thay thế để đặt **__ và __** quanh phần chữ của liên kết, không bao gồm dấu ngoặc và URL
-        new_text = re.sub(pattern, r"**__[\1]__**(\2) ", text)
-        return new_text
+        # Xác định các mẫu regex và thay thế tương ứng
+        replacements = [
+            (r"\[\*\*__(.*?)__\*\*\]\((https://[^)]+)\)", r"**__[\1]__**(\2) "),   # Xử lý trường hợp với **__ và __** bao quanh chữ được liên kết
+            (r"\[\*\*(.*?)\*\*\]\((https://[^)]+)\)", r"**[\1]**(\2) "),           # Xử lý trường hợp với ** bao quanh chữ được liên kết
+            (r"\[__(.*?)__\]\((https://[^)]+)\)", r"__[\1]__(\2) ")                # Xử lý trường hợp với __ bao quanh chữ được liên kết
+        ]
+        
+        # Hàm thay thế tùy chỉnh
+        def replace_match(match):
+            for pattern, replacement in replacements:
+                if re.fullmatch(pattern, match.group(0)):
+                    return re.sub(pattern, replacement, match.group(0))
+            return match.group(0)
 
+        # Tìm và thay thế tất cả các trường hợp khớp với các mẫu regex
+        return re.sub(r"\[.*?\]\(https://[^)]+\)", replace_match, text)
+    
     @client.on(events.NewMessage(chats=channel_0))
     async def handler(event):
         original_message_id = event.message.id
@@ -76,7 +87,7 @@ async def main(client):
     async def send_message_to_channel(client, original_message_id, channel_id, message_text, media=None):
         try:
             channel_entity = await get_channel_entity(client, channel_id)
-            
+            print("message_test: ", message_text)
             # Kiểm tra xem media có phải là MessageMediaWebPage không
             if isinstance(media, MessageMediaWebPage):
                 print("Loại bỏ MessageMediaWebPage khỏi tin nhắn.")
@@ -175,6 +186,7 @@ async def main(client):
         else:
             # Nếu không phải lệnh "/rm", xử lý chỉnh sửa tin nhắn thông thường
             modified_message_text = text.replace(command, '').strip()
+            print("modified_message_text gốc: ", modified_message_text)
             modified_message_text = modify_message_text(modified_message_text)
             print("modified_message_text sau edit: ", modified_message_text)
 
