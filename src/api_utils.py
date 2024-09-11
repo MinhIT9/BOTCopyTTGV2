@@ -1,4 +1,4 @@
-import aiohttp
+import aiohttp # type: ignore
 import json
 import ssl
 from config import messageMaping_api
