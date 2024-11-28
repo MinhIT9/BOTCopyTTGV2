@@ -33,6 +33,33 @@ sudo apt install python3-venv
 python3 -m venv myenv
 source myenv/bin/activate
 pip install aiohttp==3.8.1
+pip install python-dotenv
+
+sudo apt update
+sudo apt install screen
+screen
+screen -S tên_phiên: Tạo một phiên mới với tên xác định.
+screen -r ID_phiên: Kết nối lại một phiên screen đang chạy.
+screen -d -r ID_phiên: Tách ra và kết nối lại phiên screen.
+Ctrl + A, rồi nhấn D : Tách (detach) khỏi phiên screen
+screen -ls : Liệt kê các phiên screen đang chạy
+screen -r ID_phiên : Tái kết nối với một phiên screen
+Ctrl + D : Kết thúc một phiên screen
+Chạy screen với một lệnh cụ thể:
+  screen -S tên_phiên -dm bash -c "lệnh_của_bạn"
+  screen -S myscript -dm bash -c "python main.py"
+
+CTRL + O => Enter : Lưu file
+sudo nano /etc/nginx/sites-available/default
+sudo systemctl restart nginx
+sudo systemctl stop nginx
+
+
+npm run deploy
+
+
+python main.py
+
 
 rm myfile.txt
 rm /home/user/mydirectory/*         Lệnh này sẽ xóa tất cả các tập tin trong thư mục “mydirectory”, nhưng nó sẽ không xóa chính thư mục đó.
@@ -44,7 +71,46 @@ rm -r directory                       Để xóa một thư mục và nội dung
 
 
 
-[{"ChannelMapping":{"1":"@chanws1","2":"chan9090s","3":"-1002133340256"},"Title":"Title 1","id":"1"},{"ChannelMapping":{},"Title":"Title 2","id":"2"},{"ChannelMapping":{},"Title":"Title 3","id":"3"}]
+[
+  {
+    "ChannelMapping": {
+      "1": {
+        "-1001843463238": "🔰 VIP 1 🔰 TMP"
+      },
+      "2": {
+        "-1002092475638": "🔰 VIP 2 🔰 HHT"
+      },
+      "3": {
+        "-1002002435699": "🔰 VIP 3 🔰 TTC"
+      },
+      "4": {
+        "-1001973327709": "CÁC EM GÁI HOT FB"
+      },
+      "5": {
+        "-1001773598843": "SIÊU PHẨM / IDOL ❤️"
+      },
+      "6": {
+        "@TienGioi": "Chọn Chất Lượng Cao"
+      },
+      "c": {
+        "-1001926994371": "TOP SECRET"
+      },
+      "b": {
+        "-1002165650248": "Hide TTG"
+      },
+      "a": {
+        "-1001908639086": "☢️ Đi Cảnh ☢️"
+      }
+    },
+    "Title": "Title 1",
+    "id": "1"
+  },
+  {
+    "ChannelMapping": {},
+    "Title": "Title 2",
+    "id": "2"
+  }
+]
 
 [
     {
