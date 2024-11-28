@@ -26,6 +26,15 @@ async def main(client):
     simplified_channel_mapping = simplify_channel_mapping(channel_mapping)
     print("simplified_channel_mapping utlis: ", simplified_channel_mapping)
     
+    async def show_menu(event):
+        menu_text = (
+            "Các lệnh hiện tại:\n"
+            "/showChannel : Xem danh sách kênh\n"
+            "Bản quyền thuộc về Tu Tiên Giới !"
+        )
+        # Gửi tin nhắn với nội dung menu
+        await event.respond(menu_text)
+    
     # ------- Send START-------- #
     def modify_message_text(text):
         # Xác định các mẫu regex và thay thế tương ứng
@@ -150,7 +159,7 @@ async def main(client):
             command = ''
 
         # Kiểm tra nếu lệnh là "/rm"
-        if text.endswith("/rm"):
+        if text.casefold().endswith("/rm"):
             # Cắt bỏ lệnh "/rm" khỏi nội dung
             message_relations = await fetch_message_relations(original_message_id)
 
@@ -221,7 +230,7 @@ async def main(client):
     # ------- edit and remove handler END-------- #
     
     # ------- ShowChannel handler START-------- #
-    @client.on(events.NewMessage(chats=channel_0, pattern=r'/showChannel'))
+    @client.on(events.NewMessage(chats=channel_0, pattern=r'/showChannel', func=lambda e: re.match(r'/showChannel', e.raw_text, re.IGNORECASE)))
     async def handle_show_channel_command(event):
         global pinned_message_id
         message_id = event.message.id  # Lưu ID của tin nhắn gửi lệnhmessage_id
